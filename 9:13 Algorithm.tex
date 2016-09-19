@@ -1,0 +1,109 @@
+\documentclass[12pt]{report}
+\usepackage{amsmath}
+\usepackage{color}
+\title{Algorithm Class 1}
+\author{Introduction}
+\date{September 13, 2016}
+%\parindent=0pt
+\begin{document}
+\maketitle
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+
+\chapter*{Introduction}
+
+\section*{What's Algorithm?}
+\begin{itemize}
+
+\item Algorithm: A step-by-step procedure to solve problems.
+\item Problem: Input $\to$ Output\\
+ex: multiplication: a, b $\to$ a$\times$b\\
+ ex: sorting (Quick sort, Merge sort, Bubble sort) \newline
+\hspace*{1.3em} Implementation: computer program
+\item Why study algorithm? 
+\begin{enumerate}
+\item Performance determines feasibility. 
+\item Provide a language to talk about program behaviors. 
+\item Generalize to other resources. 
+\item Just for fun yeeeeee$\sim\sim$
+\end{enumerate}
+\item Example: Multiplication \\
+1234$\times$4321\\ 
+\begin{equation}
+\frac{
+    \begin{array}[b]{r}
+      1234\\
+      \times \left 4321 \right
+    \end{array}
+  }
+  {
+  	\begin{array}[b]{r}
+    \quad 1234\\
+    2468\enspace\\
+    \vdots ~ \quad
+    \end{array}
+  }
+\end{equation}
+Q: How many single-digit multiplications is required?? \\
+A: T(n) = \# of single-digit multiplications required to multiply 2\\ n-digit . ~T(n) = n$^2$  \\[10pt]
+Q: Can it be fewer?
+\begin{description}
+\item[Idea 1:]Use recursion\\
+ n-digit number x = a\times 10$^\frac{n}{2}$ + b \\
+ a,b = $\frac{n}{2}$ - digit numbers \\     
+ ex: \\
+ $1234 = 12 \times 10^2 + 34 \\$                       
+ $4321 = 43\times 10^2 + 21 \\$                 
+ xy = ac \times~ 10^n + (ad+bc)\times 10^$\frac{n}{2}$ + bd \\                 
+ compute xy $\iff$ compute ac, ad, bc, bd, shift digits, sum up \\                               
+ (xy = T(n) = 4T($\frac{n}{2}$)), T(n) = n^2)
+
+\item[Idea 2:]Karatsuba 
+\begin{align*}
+ xy &= ac\times 10^n + (ad+bc)\times 10^\frac{n}{2} + bd \\                     
+ &= ac\times 10^n + [(a+b)(c+d)-ac-bd]\times 10^\frac{n}{2} +bd \\                
+ T(n) &= 3T(\frac{n}{2}) \implies T(n) \propto n^{1.585} 
+\end{align*}
+
+\item[Extensions:]Toom-Cook Scheme: n$^{1.465}$\\
+Fast Fourier Transform: $n\times\log(n)\times\log\log(n)$
+\end{description}
+\item Example: sequence alignment\\
+Input: 2 sequences\\
+\hspace*{2.6em} (1)CGTTCAT ~~~~~(2)CGTTAC\\
+Output: Similarity score\\
+Alignment: \\
+\hspace*{2em}CGTTCAT\\
+\hspace*{2em}CGTT~~AC\\
+\hspace*{5em}{\color{red}$\uparrow$\quad$\uparrow$\\
+\hspace*{4em}gap\hspace{0.5em} mismatch\\}\\
+Score: C\textsubscript{1}(\# of gaps) + C\textsubscript{2}(\# of mismatchs)\\
+Target: Find the minimum score in all alignments
+\begin{description}
+\item[Idea 1:]brutal force\\
+Try all alignment $\rightarrow$ pick the minimum score.\\
+for length = 200$\sim$300, takes longer than the age of universe.
+\item[Idea 2:]Greedy\\[0.8em]
+CGTTCAT ~~~~~CGTTAC\\
+CGTT~~AC ~~~~~CGTT~~CAT\\
+\end{description}
+\item Running time (Time complexity) of an algorithm\\
+\# of steps: there's max and min number of steps.
+\item Worst case complexity
+\begin{itemize}
+\item guarantee
+\item used in the class unless it's specified
+\end{itemize}
+\item Best case complexity: can cheat
+\item Average case complexity
+
+\begin{itemize}
+\item can depend on input distribution
+\item randomized algorithm
+\end{itemize}
+
+\item Big-O notation
+
+\end{itemize}
+
+\end{document}
